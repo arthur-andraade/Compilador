@@ -10,8 +10,7 @@ typedef struct classeCaractares{
 //Assinaturas das funções
 int pesquisa(char *lexema);
 classeCaractares obtemCaracter(char c);
-void acrescentaCararacter(char *lexema, char caracter, int *tamanhoLexema);
-int lex(char *instrucao, char *lexema);
+void lex(char *instrucao, char *lexema);
 
 #endif
 

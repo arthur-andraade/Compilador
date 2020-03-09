@@ -3,8 +3,8 @@
 #include<stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include <stdbool.h>
 
+//Tokens 
 int pesquisa(char *lexema){
 
     if( strncmp(lexema,"int",3) == 0){
@@ -39,63 +39,71 @@ classeCaractares obtemCaracter(char c){
 }
 
 
-int lex(char *instrucao, char *lexema){
+void lex(char *instrucao, char *lexema){
 
     int contador = 0;
     int tamanhoLexema = 0;
     classeCaractares analiseCaracter;
+    int tamanhoInstrucao = strlen(instrucao);
 
-    analiseCaracter = obtemCaracter(instrucao[contador]);
-
-    switch (analiseCaracter.classe)
-    {
-        
-        //Letra
-        case 'l':
-            
-            //Adicionando caracter
-            lexema[tamanhoLexema] = instrucao[contador];
-            tamanhoLexema++;
-            contador++;
-            analiseCaracter = obtemCaracter(instrucao[contador]);
-
-            while (analiseCaracter.classe == 'l' || analiseCaracter.classe == 'd')
-            {
-                //Adicionando caracter
-                lexema[tamanhoLexema] = instrucao[contador];
-                tamanhoLexema++;
-                contador++;
     
-                analiseCaracter = obtemCaracter(instrucao[contador]);
-            }
-            return pesquisa(lexema);
-            break;
+    while(contador < tamanhoInstrucao){
 
-        //Digito
-        case 'd':
+        
+        analiseCaracter = obtemCaracter(instrucao[contador]);
+
+        switch (analiseCaracter.classe)
+        {
             
-            lexema[tamanhoLexema] = instrucao[contador];
-            tamanhoLexema++;
-            contador++;
-            analiseCaracter = obtemCaracter(instrucao[contador]);
-            
-            while (analiseCaracter.classe == 'd')
-            {
+            //Letra
+            case 'l':
+                
                 //Adicionando caracter
                 lexema[tamanhoLexema] = instrucao[contador];
                 tamanhoLexema++;
                 contador++;
                 analiseCaracter = obtemCaracter(instrucao[contador]);
-            }
 
-            //LIT_INT
-            return 1;
-            break;
+                while (analiseCaracter.classe == 'l' || analiseCaracter.classe == 'd')
+                {
+                    //Adicionando caracter
+                    lexema[tamanhoLexema] = instrucao[contador];
+                    tamanhoLexema++;
+                    contador++;
+        
+                    analiseCaracter = obtemCaracter(instrucao[contador]);
+                }
+                
+                printf("token --> %d \n", pesquisa(lexema));
+                break;
 
-        //Default
-        default:
-            return 0;
-            break;
+            //Digito
+            case 'd':
+                
+                lexema[tamanhoLexema] = instrucao[contador];
+                tamanhoLexema++;
+                contador++;
+                analiseCaracter = obtemCaracter(instrucao[contador]);
+                
+                while (analiseCaracter.classe == 'd')
+                {
+                    //Adicionando caracter
+                    lexema[tamanhoLexema] = instrucao[contador];
+                    tamanhoLexema++;
+                    contador++;
+                    analiseCaracter = obtemCaracter(instrucao[contador]);
+                }
+
+                //LIT_INT
+                printf("token --> %d \n", 1);
+                break;
+
+            //Default tokens não determinados "espaço, atribuição, operadores aritmetricos, etc"
+            default:
+                contador++;
+                printf("token --> %d \n", 0);
+                break;
+        }
     }
 }
 
