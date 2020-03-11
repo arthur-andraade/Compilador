@@ -11,6 +11,6 @@ typedef struct classeCaractares{
 int pesquisa(char *lexema);
 classeCaractares obtemCaracter(char c);
 void lex(char *instrucao, char *lexema);
-
+void reiniciaLexema(int* tamanho, char*lexema);
 #endif
 

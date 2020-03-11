@@ -75,6 +75,7 @@ void lex(char *instrucao, char *lexema){
                 }
                 
                 printf("token --> %d \n", pesquisa(lexema));
+                reiniciaLexema(&tamanhoLexema, lexema);
                 break;
 
             //Digito
@@ -96,17 +97,26 @@ void lex(char *instrucao, char *lexema){
 
                 //LIT_INT
                 printf("token --> %d \n", 1);
+                reiniciaLexema(&tamanhoLexema, lexema);
                 break;
 
             //Default tokens não determinados "espaço, atribuição, operadores aritmetricos, etc"
             default:
-                contador++;
                 printf("token --> %d \n", 0);
+                contador++;
                 break;
         }
     }
 }
 
-
+void reiniciaLexema(int* tamanho, char*lexema){
+   int contador = 0;
+   while (contador < *tamanho )
+   {    
+       lexema[contador] = '\0';
+       contador++;
+   }
+    *tamanho = 0;
+}
 
 

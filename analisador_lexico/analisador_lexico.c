@@ -3,7 +3,7 @@
 int main()
 {
     //Instrução para analise
-    char instrucao[] ="int variavel = 0;";
+    char instrucao[] ="int variavael = 0;";
     char lexema[100];
     lex(instrucao,lexema);
 
