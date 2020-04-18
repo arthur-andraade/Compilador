@@ -1,0 +1,5 @@
+int numero = 1;
+int soma = 0; 
+float numero2 = 4;
+char a;
+char b;
